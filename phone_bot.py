@@ -45,11 +45,6 @@ def sanitize_phone_number(phone_num):
         .replace("-", "")
         .replace(" ", "")
     )
-
-    if len(new_phone) == 12:
-        new_phone = "".join("+" + new_phone)
-    else:
-        new_phone = "".join("+38" + new_phone)
     return new_phone
 
 
@@ -99,19 +94,19 @@ def show_all():
 def run_bot(user_input):
 
     input_list = user_input.split(" ")
-    if user_input.strip() == 'hello':
+    if user_input.strip().lower() == 'hello':
         print("How can I help you?")
 
-    elif user_input == "show all":
+    elif user_input.lower() == "show all":
         show_all()
 
-    elif input_list[0] == 'phone':
+    elif input_list[0].lower() == 'phone':
         phone(input_list[1])
 
-    elif input_list[0] == 'add':
+    elif input_list[0].lower() == 'add':
         add(input_list[1], input_list[2])
 
-    elif input_list[0] == 'change':
+    elif input_list[0].lower() == 'change':
         change(input_list[1], input_list[2], input_list[3])
 
     else:
