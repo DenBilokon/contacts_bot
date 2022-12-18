@@ -10,6 +10,8 @@ def main():
         if user_input.strip() in bye_list:
             print('Good bye!')
             checking = False
+        elif user_input == 'help':
+            print(help_user)
         else:
             run_bot(user_input)
 

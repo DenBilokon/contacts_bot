@@ -1,6 +1,18 @@
 
 PHONE_DICT = {}
 
+help_user = """This contact bot save your contacts 
+    Global commands:
+      'add' - add new contact. Input user name and phone
+    Example: add User_name 095-xxx-xx-xx
+      'change' - change users old phone to new phone. Input user name, old phone and new phone
+    Example: change User_name 095-xxx-xx-xx 050-xxx-xx-xx
+      'phone' - show contacts of input user. Input user name
+    Example: phone User_name
+      'show all' - show all contacts
+    Example: show all
+      'exit/'.'/'bye'/'good bye'/'close' - exit bot
+    Example: good bye"""
 
 # Decorator - оброблює помилки введення і виводить відповідний результат
 def input_error(func):
