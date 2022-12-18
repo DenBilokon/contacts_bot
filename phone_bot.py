@@ -56,6 +56,7 @@ def add(name, phone_num):
     if name not in PHONE_DICT:
         PHONE_DICT[name] = []
         PHONE_DICT[name].append(sanitize_phone_number(phone_num))
+    print(f"Added new contact - {name} {sanitize_phone_number(phone_num)}")
     return PHONE_DICT
 
 
@@ -65,6 +66,7 @@ def change(name: str, old_num: str, new_num):
     if name in PHONE_DICT:
         PHONE_DICT[name].remove(sanitize_phone_number(old_num))
         PHONE_DICT[name].append(sanitize_phone_number(new_num))
+    print(f"Changed contact {name} - number {sanitize_phone_number(old_num)} to number {sanitize_phone_number(new_num)}")
     return PHONE_DICT
 
 
