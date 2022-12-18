@@ -9,7 +9,7 @@ def input_error(func):
             func(*args)
 
         except IndexError:
-            return print("Give me name and phone")
+            return print("Give me name, old phone and new phone")
 
         except KeyError:
             return print("Enter correct user name")
@@ -21,6 +21,7 @@ def input_error(func):
             return func
 
     return wrapper
+
 
 # Оброблює введений номер телефону до стандартного виду
 def sanitize_phone_number(phone_num):
@@ -41,8 +42,8 @@ def sanitize_phone_number(phone_num):
 
 
 # Додаємо новий номер телефону до списку
-@input_error
-def add(name, phone_num: str):
+
+def add(name, phone_num):
     if name in PHONE_DICT:
         PHONE_DICT[name].append(sanitize_phone_number(phone_num))
     if name not in PHONE_DICT:
@@ -52,7 +53,7 @@ def add(name, phone_num: str):
 
 
 # Замінюємо старий номер телефону на новий
-@input_error
+
 def change(name: str, old_num: str, new_num):
     if name in PHONE_DICT:
         PHONE_DICT[name].remove(sanitize_phone_number(old_num))
@@ -61,28 +62,48 @@ def change(name: str, old_num: str, new_num):
 
 
 # Виводимо номер телефону по імені
-@input_error
+
 def phone(name):
-    return print(PHONE_DICT[name])
+    phones = ""
+    for i in PHONE_DICT[name]:
+        phones += i + " "
+    return print(phones)
 
 
 # Виводимо всі номери телефонів
-
 def show_all():
     text = ""
     for name_user, phone_list in PHONE_DICT.items():
         phones = ""
         for i in phone_list:
-            if i[-1] == i:
-                phones += i
-            else:
-                phones += i + ", "
+            phones += i + " "
         text += ''.join(name_user + ": " + phones + '\n')
 
     return print(text)
 
 
+# Функція спілкування з юзером і виконання функцій відповідно до команди
+@input_error
+def run_bot(user_input):
 
+    input_list = user_input.split(" ")
+    if user_input.strip() == 'hello':
+        print("How can I help you?")
+
+    elif user_input == "show all":
+        show_all()
+
+    elif input_list[0] == 'phone':
+        phone(input_list[1])
+
+    elif input_list[0] == 'add':
+        add(input_list[1], input_list[2])
+
+    elif input_list[0] == 'change':
+        change(input_list[1], input_list[2], input_list[3])
+
+    else:
+        print("Incorrect input. Try again")
 
 
 
